@@ -21,10 +21,9 @@ public class SportDataAccessService implements Dao<Sport> {
         String sql = "UPDATE sport set startPeriod=?,endPeriod=?,name=? where id=?";
         int updated = jdbcTemplate.update(sql, sport.getStartPeriod(), sport.getEndPeriod(),
                 sport.getName(), sport.getId());
-        if (updated == 1)
+        if (updated == 1) {
             return sport;
-        else return null;
-
+        } else return null;
     }
 
     @Override

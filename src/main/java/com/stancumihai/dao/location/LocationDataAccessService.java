@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("Dao")
+@Repository("LocationDao")
 public class LocationDataAccessService implements Dao<Location> {
 
     @Autowired
@@ -18,17 +18,15 @@ public class LocationDataAccessService implements Dao<Location> {
     @Override
     public Location update(Long id, Location location) {
         String sql = "UPDATE location set name=? where id=?";
-        int updated = jdbcTemplate.update(sql, location.getName(), location.getId());
-        if (updated == 1)
-            return location;
-        else return null;
+        jdbcTemplate.update(sql, location.getName(), location.getId());
+
+        return location;
     }
 
     @Override
     public int create(Location element) {
-        String sql = "INSERT into location(name) values (? ?)";
-        return jdbcTemplate.update(sql, new LocationRowMapper(),
-                element.getId(), element.getName());
+        String sql = "INSERT into location(name) values (?)";
+        return jdbcTemplate.update(sql, element.getName());
     }
 
     @Override

@@ -2,7 +2,10 @@ package com.stancumihai.api.location;
 
 
 import com.stancumihai.model.Location;
+import com.stancumihai.service.CountryService;
+import com.stancumihai.service.LocalService;
 import com.stancumihai.service.LocationService;
+import com.stancumihai.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +16,21 @@ import java.util.List;
 public class LocationController {
 
     private final LocationService locationService;
+    private final CountryService countryService;
+    private final LocalService localService;
+    private final RegionService regionService;
 
     @Autowired
-    public LocationController(LocationService locationService) {
+    public LocationController(LocationService locationService,
+                              CountryService countryService,
+                              LocalService localService,
+                              RegionService regionService) {
         this.locationService = locationService;
+        this.countryService = countryService;
+        this.localService = localService;
+        this.regionService = regionService;
     }
+
 
     @PostMapping
     public int create(@RequestBody Location location) {
@@ -25,9 +38,10 @@ public class LocationController {
     }
 
     @GetMapping
-    public List<Location> selectAll(){
+    public List<Location> selectAll() {
         return locationService.selectAll();
     }
+
     @GetMapping("{id}")
     public Location findById(@PathVariable("id") Long id) {
         return locationService.findById(id);
@@ -36,5 +50,10 @@ public class LocationController {
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") Long id) {
         return locationService.delete(id);
+    }
+
+    @PutMapping("{id}")
+    public Location update(@PathVariable("id") Long id, @RequestBody Location location) {
+        return locationService.update(id, location);
     }
 }

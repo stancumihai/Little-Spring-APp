@@ -1,7 +1,7 @@
 package com.stancumihai.service;
 
 import com.stancumihai.dao.Dao;
-import com.stancumihai.model.Location;
+import com.stancumihai.model.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -9,32 +9,32 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class LocationService {
+public class LocalService {
 
-    private final Dao<Location> dao;
+    private final Dao<Local> dao;
 
     @Autowired
-    public LocationService(@Qualifier("LocationDao") Dao<Location> dao) {
+    public LocalService(@Qualifier("LocalDao") Dao<Local> dao) {
         this.dao = dao;
     }
 
-    public Location findById(Long id) {
+    public Local findById(Long id) {
         return dao.findById(id);
     }
 
-    public int create(Location location) {
-        return dao.create(location);
+    public int create(Local local) {
+        return dao.create(local);
     }
 
     public int delete(Long id) {
         return dao.deleteById(id);
     }
 
-    public List<Location> selectAll() {
+    public List<Local> selectAll() {
         return dao.selectAll();
     }
 
-    public Location update(Long id, Location location) {
-        return dao.update(id, location);
+    public Local update(Long id, Local local) {
+        return dao.update(id, local);
     }
 }

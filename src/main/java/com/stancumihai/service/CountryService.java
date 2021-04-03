@@ -1,7 +1,7 @@
 package com.stancumihai.service;
 
 import com.stancumihai.dao.Dao;
-import com.stancumihai.model.Location;
+import com.stancumihai.model.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -9,20 +9,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class LocationService {
+public class CountryService {
 
-    private final Dao<Location> dao;
+    private final Dao<Country> dao;
 
     @Autowired
-    public LocationService(@Qualifier("LocationDao") Dao<Location> dao) {
+    public CountryService(@Qualifier("CountryDao") Dao<Country> dao) {
         this.dao = dao;
     }
 
-    public Location findById(Long id) {
+    public Country findById(Long id) {
         return dao.findById(id);
     }
 
-    public int create(Location location) {
+    public int create(Country location) {
         return dao.create(location);
     }
 
@@ -30,11 +30,11 @@ public class LocationService {
         return dao.deleteById(id);
     }
 
-    public List<Location> selectAll() {
+    public List<Country> selectAll() {
         return dao.selectAll();
     }
 
-    public Location update(Long id, Location location) {
-        return dao.update(id, location);
+    public Country update(Long id, Country country) {
+        return dao.update(id, country);
     }
 }

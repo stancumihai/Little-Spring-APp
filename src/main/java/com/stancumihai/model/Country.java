@@ -1,10 +1,9 @@
 package com.stancumihai.model;
 
-public class Country extends Location{
+public class Country extends Location {
 
     private Long id;
     private Location location;
-
 
     public Country() {
     }
