@@ -3,6 +3,7 @@ package com.stancumihai.dao.sport;
 import com.stancumihai.dao.Dao;
 import com.stancumihai.mapper.SportRowMapper;
 import com.stancumihai.model.Sport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Repository("SportDao")
 public class SportDataAccessService implements Dao<Sport> {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
@@ -33,7 +35,7 @@ public class SportDataAccessService implements Dao<Sport> {
 
     @Override
     public Sport findById(Long id) {
-        String sql = "SELECT FROM sport where id =?";
+        String sql = "SELECT * FROM sport where id =?";
         return jdbcTemplate.queryForObject(sql, new SportRowMapper(), id);
     }
 

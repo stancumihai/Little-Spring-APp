@@ -19,26 +19,21 @@ public class SportService {
         this.dao = dao;
     }
 
-
     public Sport update(Long id, Sport sport) {
         return dao.update(id, sport);
     }
-
 
     public int create(Sport element) {
         return dao.create(element);
     }
 
-
     public Sport findById(Long id) {
         return dao.findById(id);
     }
 
-
     public int deleteById(Long id) {
         return dao.deleteById(id);
     }
-
 
     public List<Sport> selectAll() {
         return dao.selectAll();
