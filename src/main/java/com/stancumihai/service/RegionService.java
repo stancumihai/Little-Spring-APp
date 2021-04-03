@@ -1,6 +1,7 @@
 package com.stancumihai.service;
 
 import com.stancumihai.dao.Dao;
+import com.stancumihai.model.Location;
 import com.stancumihai.model.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,10 +13,12 @@ import java.util.List;
 public class RegionService {
 
     private final Dao<Region> dao;
+    public final LocationService locationService;
 
     @Autowired
-    public RegionService(@Qualifier("RegionDao") Dao<Region> dao) {
+    public RegionService(@Qualifier("RegionDao") Dao<Region> dao, LocationService locationService) {
         this.dao = dao;
+        this.locationService = locationService;
     }
 
     public Region findById(Long id) {
@@ -36,5 +39,12 @@ public class RegionService {
 
     public Region update(Long id, Region region) {
         return dao.update(id, region);
+    }
+
+    public Region getRegionByLocationId(Long id) {
+        Region region = findById(id);
+        Location location = locationService.findById(id);
+        region.setLocation(location);
+        return region;
     }
 }

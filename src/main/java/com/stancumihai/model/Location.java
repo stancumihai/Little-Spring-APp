@@ -11,7 +11,6 @@ public class Location {
 
     public Location(String name, String country) {
         this.name = name;
-         ;
     }
 
     public Location(Long id, String name ) {

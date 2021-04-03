@@ -49,4 +49,5 @@ public class LocalDataAccessService implements Dao<Local> {
         String sql = "Select *from local";
         return jdbcTemplate.query(sql, new LocalRowMapper());
     }
+
 }

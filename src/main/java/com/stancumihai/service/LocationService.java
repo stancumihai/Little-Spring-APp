@@ -37,4 +37,5 @@ public class LocationService {
     public Location update(Long id, Location location) {
         return dao.update(id, location);
     }
+
 }

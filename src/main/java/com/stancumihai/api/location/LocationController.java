@@ -1,7 +1,10 @@
 package com.stancumihai.api.location;
 
 
+import com.stancumihai.model.Country;
+import com.stancumihai.model.Local;
 import com.stancumihai.model.Location;
+import com.stancumihai.model.Region;
 import com.stancumihai.service.CountryService;
 import com.stancumihai.service.LocalService;
 import com.stancumihai.service.LocationService;
@@ -55,5 +58,20 @@ public class LocationController {
     @PutMapping("{id}")
     public Location update(@PathVariable("id") Long id, @RequestBody Location location) {
         return locationService.update(id, location);
+    }
+
+    @GetMapping("local/{id}")
+    public Local getLocalByLocationId(@PathVariable("id") Long id) {
+        return localService.getLocalByLocationId(id);
+    }
+
+    @GetMapping("region/{id}")
+    public Country getCountryByLocationId(@PathVariable("id") Long id) {
+        return countryService.getCountryByLocationId(id);
+    }
+
+    @GetMapping("country/{id}")
+    public Region getRegionByLocationId(@PathVariable("id") Long id) {
+        return regionService.getRegionByLocationId(id);
     }
 }
