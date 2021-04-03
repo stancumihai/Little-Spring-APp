@@ -1,23 +1,23 @@
-package com.stancumihai.test.model;
+package com.stancumihai.model;
 
-public class Sport {
+public class Location {
 
     private Long id;
-    private String period;
     private String name;
 
-    public Sport() {
+    public Location() {
+
     }
 
-    public Sport(String period, String name) {
-        this.period = period;
+    public Location(String name, String country) {
         this.name = name;
+         ;
     }
 
-    public Sport(Long id, String period, String name) {
+    public Location(Long id, String name ) {
         this.id = id;
-        this.period = period;
         this.name = name;
+
     }
 
     public Long getId() {
@@ -26,14 +26,6 @@ public class Sport {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
     }
 
     public String getName() {
@@ -46,9 +38,8 @@ public class Sport {
 
     @Override
     public String toString() {
-        return "Sport{" +
+        return "Location{" +
                 "id=" + id +
-                ", period='" + period + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }

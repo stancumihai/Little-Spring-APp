@@ -1,13 +1,31 @@
-package com.stancumihai.test.model;
+package com.stancumihai.model;
 
-public class SportLocation {
+public class SportLocations {
 
+    private Long id;
     private Sport sport;
     private Location location;
 
-    public SportLocation(Sport sport, Location location) {
+    public SportLocations() {
+    }
+
+    public SportLocations(Sport sport, Location location) {
         this.sport = sport;
         this.location = location;
+    }
+
+    public SportLocations(Long id, Sport sport, Location location) {
+        this.id = id;
+        this.sport = sport;
+        this.location = location;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Sport getSport() {

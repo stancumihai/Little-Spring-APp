@@ -1,4 +1,4 @@
-package com.stancumihai.test;
+package com.stancumihai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,19 +1,18 @@
-package com.stancumihai.test.model;
+package com.stancumihai.model;
 
-public class Country extends Location{
+public class Local extends Location{
 
     private Long id;
     private Location location;
 
-
-    public Country() {
+    public Local() {
     }
 
-    public Country(Location location) {
+    public Local(Location location) {
         this.location = location;
     }
 
-    public Country(Long id, Location location) {
+    public Local(Long id, Location location) {
         this.id = id;
         this.location = location;
     }
@@ -36,7 +35,7 @@ public class Country extends Location{
 
     @Override
     public String toString() {
-        return "Country{" +
+        return "Local{" +
                 "id=" + id +
                 ", location=" + location +
                 '}';

@@ -1,8 +1,8 @@
-package com.stancumihai.test.model;
+package com.stancumihai.model;
 
 public class Region extends Location{
 
-    private long id;
+    private Long id;
     private Location location;
 
     public Region() {
@@ -17,11 +17,11 @@ public class Region extends Location{
         this.location = location;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
