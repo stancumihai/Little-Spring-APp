@@ -14,11 +14,6 @@ public class PersonController {
 
     private final PersonService personService;
 
-    @GetMapping("123")
-    public String sayHello() {
-        return "fuck";
-    }
-
     @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
