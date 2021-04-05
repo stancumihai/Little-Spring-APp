@@ -27,9 +27,8 @@ public class CountryService {
     }
 
     public Country create(Country country) {
-        Country createdCountry = dao.create(country);
-        createdCountry.setLocation(locationService.findById(createdCountry.getLocation().getId()));
-        return createdCountry;
+       return dao.create(country);
+
     }
 
     public int delete(Long id) {
@@ -37,18 +36,7 @@ public class CountryService {
     }
 
     public List<Country> selectAll() {
-        List<Country> countries = dao.selectAll();
-        for (Country country : countries) {
-            Location location = locationService.findById(country.getLocation().getId());
-            if (locationService.selectAll().contains(country)) {
-                String name = location.getName();
-                country.setLocation(location);
-                country.setName(name);
-                System.out.println(country);
-            }
-        }
-
-        return countries;
+       return dao.selectAll();
     }
 
     public Country update(Long id, Country country) {

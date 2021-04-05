@@ -43,7 +43,6 @@ public class CountryController {
         return countryService.findById(id);
     }
 
-
     /**
      * It works
      */
