@@ -14,6 +14,7 @@ public class SportRowMapper implements RowMapper<Sport> {
         sport.setName(resultSet.getString("name"));
         sport.setStartPeriod(resultSet.getString("startPeriod"));
         sport.setEndPeriod(resultSet.getString("endPeriod"));
+        sport.setPrice(resultSet.getFloat("price"));
         return sport;
     }
 }

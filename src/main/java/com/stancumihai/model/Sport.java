@@ -6,21 +6,24 @@ public class Sport {
     private String startPeriod;
     private String endPeriod;
     private String name;
+    private Float price;
 
     public Sport() {
     }
 
-    public Sport(String startPeriod, String endPeriod, String name) {
+    public Sport(String startPeriod, String endPeriod, String name, Float price) {
         this.startPeriod = startPeriod;
         this.endPeriod = endPeriod;
         this.name = name;
+        this.price = price;
     }
 
-    public Sport(Long id, String startPeriod, String endPeriod, String name) {
+    public Sport(Long id, String startPeriod, String endPeriod, String name, Float price) {
         this.id = id;
         this.startPeriod = startPeriod;
         this.endPeriod = endPeriod;
         this.name = name;
+        this.price = price;
     }
 
     public Long getId() {
@@ -55,6 +58,14 @@ public class Sport {
         this.name = name;
     }
 
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Sport{" +
@@ -62,6 +73,7 @@ public class Sport {
                 ", startPeriod='" + startPeriod + '\'' +
                 ", endPeriod='" + endPeriod + '\'' +
                 ", name='" + name + '\'' +
+                ", price=" + price +
                 '}';
     }
 }
