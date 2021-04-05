@@ -1,7 +1,10 @@
 package com.stancumihai.model;
 
-public class Country extends Location{
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+public class Country extends Location {
+
+    @JsonSerialize(using = CustomSerializer.class)
     private Long id;
     private Location location;
 
