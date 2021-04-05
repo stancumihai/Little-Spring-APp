@@ -29,7 +29,7 @@ public class SportLocationsDataAccessService implements SportLocationsDao {
 
     @Override
     public List<Sport> getSportsByLocation(Location location) {
-        String sql = "SELECT s.id,s.name,s.startPeriod,s.endPeriod from sport s inner join " +
+        String sql = "SELECT s.id,s.name,s.startPeriod,s.endPeriod,s.price from sport s inner join " +
                 "sportLocations sL on s.id = sL.sport inner join location l on l.id=sL.location";
         return jdbcTemplate.query(sql, new SportRowMapper());
     }
