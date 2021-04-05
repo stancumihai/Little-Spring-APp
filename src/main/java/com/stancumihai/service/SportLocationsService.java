@@ -3,6 +3,7 @@ package com.stancumihai.service;
 import com.stancumihai.dao.sportLocations.SportLocationsDataAccessService;
 import com.stancumihai.model.Location;
 import com.stancumihai.model.Sport;
+import com.stancumihai.model.SportLocations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,7 @@ public class SportLocationsService {
                 toBeAdded.add(sport);
             }
         }
+
         return toBeAdded;
     }
 
@@ -51,5 +53,31 @@ public class SportLocationsService {
 
     public List<Location> getLocationsBySport(Sport sport) {
         return sportLocationsDataAccessService.getLocationsBySport(sport);
+    }
+
+
+    public SportLocations update(Long id,SportLocations element) {
+
+        return sportLocationsDataAccessService.update(id,element);
+    }
+
+
+    public int create(SportLocations element) {
+        return sportLocationsDataAccessService.create(element);
+    }
+
+
+    public SportLocations findById(Long id) {
+        return sportLocationsDataAccessService.findById(id);
+    }
+
+
+    public int deleteById(Long id) {
+        return sportLocationsDataAccessService.deleteById(id);
+    }
+
+
+    public List<SportLocations> selectAll() {
+        return sportLocationsDataAccessService.selectAll();
     }
 }

@@ -1,5 +1,7 @@
 package com.stancumihai.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class SportLocations {
 
     private Long id;

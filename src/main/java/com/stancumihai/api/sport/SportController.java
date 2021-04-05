@@ -21,37 +21,55 @@ public class SportController {
         this.sportLocationsService = sportLocationsService;
     }
 
+    // TODO: 4/5/2021 Repair this
     @PutMapping("{id}")
     public Sport update(@PathVariable("id") Long id, @RequestBody Sport sport) {
         return sportService.update(id, sport);
     }
 
+    /**
+     * It works
+     */
     @PostMapping()
     public int create(@RequestBody Sport element) {
         return sportService.create(element);
     }
 
+    /**
+     * It works
+     */
     @GetMapping("{id}")
     public Sport findById(@PathVariable("id") Long id) {
         return sportService.findById(id);
     }
 
+    /**
+     * It works
+     */
     @DeleteMapping("{id}")
     public int deleteById(@PathVariable("id") Long id) {
         return sportService.deleteById(id);
     }
 
+    /**
+     * It works
+     */
     @GetMapping
     public List<Sport> selectAll() {
         return sportService.selectAll();
     }
 
+    /**
+     * It works
+     */
     @GetMapping("end/{date}")
     public List<Sport> getSportLocationsEndPeriods(@PathVariable("date") String endDate) {
         return sportLocationsService.getSportLocationsEndPeriods(endDate);
     }
 
-
+    /**
+     * It works
+     */
     @GetMapping("start/{date}")
     public List<Sport> getSportLocationsStartPeriods(@PathVariable("date") String startDate) {
         return sportLocationsService.getSportLocationsStartPeriods(startDate);

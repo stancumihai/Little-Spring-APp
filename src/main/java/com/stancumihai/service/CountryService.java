@@ -41,10 +41,13 @@ public class CountryService {
         return dao.update(id, country);
     }
 
-    public Country getCountryByLocationId(Long id) {
-        Country country = findById(id);
-        Location location = locationService.findById(id);
-        country.setLocation(location);
-        return country;
+    public Location getLocationByCountryId(Long id) {
+        for (Country country : selectAll()) {
+            if (country.getLocation().getId().equals(id)) {
+                System.out.println( locationService.findById(country.getLocation().getId()).getName());
+                return locationService.findById(country.getLocation().getId());
+            }
+        }
+        return null;
     }
 }

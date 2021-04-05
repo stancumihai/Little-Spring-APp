@@ -39,7 +39,7 @@ public class LocalDataAccessService implements Dao<Local> {
     public int deleteById(Long id) {
         if (findById(id) != null) {
             String sql = "delete from local where id=?";
-            return jdbcTemplate.update(sql, new LocalRowMapper(), id);
+            return jdbcTemplate.update(sql, id);
         }
         return -1;
     }

@@ -20,21 +20,32 @@ public class CountryController {
         this.countryService = countryService;
     }
 
+    // TODO: 4/5/2021 Fix this 
     @PostMapping
     public int create(@RequestBody Country location) {
         return countryService.create(location);
     }
 
+    /**
+     * It works
+     */
     @GetMapping
     public List<Country> selectAll() {
         return countryService.selectAll();
     }
 
+    /**
+     * It works
+     */
     @GetMapping("{id}")
     public Country findById(@PathVariable("id") Long id) {
         return countryService.findById(id);
     }
 
+
+    /**
+     * It works
+     */
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") Long id) {
         return countryService.delete(id);
@@ -44,6 +55,7 @@ public class CountryController {
     public Country update(@PathVariable("id") Long id, @RequestBody Country location) {
         return countryService.update(id, location);
     }
+
 }
 
 

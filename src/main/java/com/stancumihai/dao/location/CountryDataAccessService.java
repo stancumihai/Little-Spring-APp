@@ -5,15 +5,24 @@ import com.stancumihai.mapper.CountryRowMapper;
 import com.stancumihai.model.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository("CountryDao")
 public class CountryDataAccessService implements Dao<Country> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public Country update(Long id, Country country) {
@@ -25,13 +34,19 @@ public class CountryDataAccessService implements Dao<Country> {
 
     @Override
     public int create(Country country) {
-        String sql = "INSERT into country(location) values (?)";
+        String sql = "INSERT into country(location) values (:location)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource parameter = new MapSqlParameterSource()
+                .addValue("location", country.getLocation().getId());
+        namedParameterJdbcTemplate.update(sql, parameter, holder);
+        country.setId(Objects.requireNonNull(holder.getKey()).longValue());
         return jdbcTemplate.update(sql, country.getLocation());
     }
 
     @Override
     public Country findById(Long id) {
         String sql = "SELECT * from aplicatie.country where id =?";
+
         return jdbcTemplate.queryForObject(sql, new CountryRowMapper(), id);
     }
 
@@ -39,7 +54,7 @@ public class CountryDataAccessService implements Dao<Country> {
     public int deleteById(Long id) {
         if (findById(id) != null) {
             String sql = "delete from country where id=?";
-            return jdbcTemplate.update(sql, new CountryRowMapper(), id);
+            return jdbcTemplate.update(sql, id);
         }
         return -1;
     }

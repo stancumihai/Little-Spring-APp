@@ -41,7 +41,7 @@ public class RegionDataAccessService implements Dao<Region> {
     public int deleteById(Long id) {
         if (findById(id) != null) {
             String sql = "delete from region where id=?";
-            return jdbcTemplate.update(sql, new RegionRowMapper(), id);
+            return jdbcTemplate.update(sql, id);
         }
         return -1;
     }

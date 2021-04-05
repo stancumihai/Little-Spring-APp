@@ -1,10 +1,7 @@
 package com.stancumihai.api.location;
 
 
-import com.stancumihai.model.Country;
-import com.stancumihai.model.Local;
 import com.stancumihai.model.Location;
-import com.stancumihai.model.Region;
 import com.stancumihai.service.CountryService;
 import com.stancumihai.service.LocalService;
 import com.stancumihai.service.LocationService;
@@ -19,32 +16,36 @@ import java.util.List;
 public class LocationController {
 
     private final LocationService locationService;
-    private final CountryService countryService;
     private final LocalService localService;
     private final RegionService regionService;
+    private final CountryService countryService;
 
     @Autowired
-    public LocationController(LocationService locationService,
-                              CountryService countryService,
-                              LocalService localService,
-                              RegionService regionService) {
+    public LocationController(LocationService locationService, LocalService localService,
+                              RegionService regionService, CountryService countryService) {
         this.locationService = locationService;
-        this.countryService = countryService;
         this.localService = localService;
+        this.countryService = countryService;
         this.regionService = regionService;
     }
 
-
+    /**
+     * It works
+     */
     @PostMapping
     public int create(@RequestBody Location location) {
         return locationService.create(location);
     }
-
+    /**
+     * It works
+     */
     @GetMapping
     public List<Location> selectAll() {
         return locationService.selectAll();
     }
-
+    /**
+     * It works
+     */
     @GetMapping("{id}")
     public Location findById(@PathVariable("id") Long id) {
         return locationService.findById(id);
@@ -54,24 +55,35 @@ public class LocationController {
     public int delete(@PathVariable("id") Long id) {
         return locationService.delete(id);
     }
-
+    /**
+     * It works
+     */
     @PutMapping("{id}")
     public Location update(@PathVariable("id") Long id, @RequestBody Location location) {
         return locationService.update(id, location);
     }
 
+    /**
+     * It works
+     */
     @GetMapping("local/{id}")
-    public Local getLocalByLocationId(@PathVariable("id") Long id) {
-        return localService.getLocalByLocationId(id);
+    public Location getLocationByLocalId(@PathVariable("id") Long id) {
+        return localService.getLocationByLocalId(id);
     }
 
-    @GetMapping("region/{id}")
-    public Country getCountryByLocationId(@PathVariable("id") Long id) {
-        return countryService.getCountryByLocationId(id);
-    }
-
+    /**
+     * It works
+     */
     @GetMapping("country/{id}")
-    public Region getRegionByLocationId(@PathVariable("id") Long id) {
-        return regionService.getRegionByLocationId(id);
+    public Location getLocationByCountryId(@PathVariable("id") Long id) {
+        return countryService.getLocationByCountryId(id);
+    }
+
+    /**
+     * It works
+     */
+    @GetMapping("region/{id}")
+    public Location getLocationByRegionId(@PathVariable("id") Long id) {
+        return regionService.getLocationByRegionId(id);
     }
 }

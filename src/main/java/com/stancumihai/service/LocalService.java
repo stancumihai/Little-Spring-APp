@@ -18,7 +18,8 @@ public class LocalService {
     @Autowired
     public LocalService(@Qualifier("LocalDao") Dao<Local> dao, LocationService locationService) {
         this.dao = dao;
-        this.locationService=locationService;
+        this.locationService = locationService;
+
     }
 
     public Local findById(Long id) {
@@ -41,10 +42,12 @@ public class LocalService {
         return dao.update(id, local);
     }
 
-    public Local getLocalByLocationId(Long id) {
-        Local local = findById(id);
-        Location location = locationService.findById(id);
-        local.setLocation(location);
-        return local;
+    public Location getLocationByLocalId(Long id) {
+        for (Local local : selectAll()) {
+            if (local.getLocation().getId().equals(id)) {
+                return locationService.findById(local.getLocation().getId());
+            }
+        }
+        return null;
     }
 }
