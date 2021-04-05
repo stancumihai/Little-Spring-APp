@@ -42,9 +42,8 @@ public class sportLocationsController {
         return sportLocationsService.update(id, element);
     }
 
-    // TODO: 4/5/2021 Fix This
     @PostMapping
-    public int create(@RequestBody SportLocations element) {
+    public SportLocations create(@RequestBody SportLocations element) {
         return sportLocationsService.create(element);
     }
 

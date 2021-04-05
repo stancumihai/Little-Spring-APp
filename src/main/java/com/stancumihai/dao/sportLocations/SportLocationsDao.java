@@ -14,7 +14,7 @@ public interface SportLocationsDao {
 
     SportLocations update(Long id,SportLocations element);
 
-    int create(SportLocations element);
+    SportLocations create(SportLocations element);
 
     SportLocations findById(Long id);
 

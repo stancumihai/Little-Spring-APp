@@ -21,7 +21,7 @@ public class RegionController {
 
     // TODO: 4/5/2021 FixThis
     @PostMapping
-    public int create(@RequestBody Region region) {
+    public Region create(@RequestBody Region region) {
         return regionService.create(region);
     }
 

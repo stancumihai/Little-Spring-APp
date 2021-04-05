@@ -9,15 +9,23 @@ import com.stancumihai.model.Sport;
 import com.stancumihai.model.SportLocations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository("SportLocationRepo")
 public class SportLocationsDataAccessService implements SportLocationsDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public List<Sport> getSportsByLocation(Location location) {
@@ -43,9 +51,15 @@ public class SportLocationsDataAccessService implements SportLocationsDao {
     }
 
     @Override
-    public int create(SportLocations element) {
-        String sql = "Insert into sportLocations(location,sport) values(?,?)";
-        return jdbcTemplate.update(sql, element.getId(), element.getLocation(), element.getSport());
+    public SportLocations create(SportLocations element) {
+        String sql = "Insert into sportLocations(location,sport) values(:sport,:location)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("sport", element.getSport())
+                .addValue("location", element.getLocation());
+        namedParameterJdbcTemplate.update(sql,parameters,holder);
+        element.setId(Objects.requireNonNull(holder.getKey()).longValue());
+        return element;
     }
 
     @Override

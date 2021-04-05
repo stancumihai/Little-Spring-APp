@@ -31,7 +31,7 @@ public class SportController {
      * It works
      */
     @PostMapping()
-    public int create(@RequestBody Sport element) {
+    public Sport create(@RequestBody Sport element) {
         return sportService.create(element);
     }
 

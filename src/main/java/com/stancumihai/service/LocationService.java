@@ -19,7 +19,7 @@ public class LocationService {
         return dao.findById(id);
     }
 
-    public int create(Location location) {
+    public Location create(Location location) {
         return dao.create(location);
     }
 
@@ -33,7 +33,6 @@ public class LocationService {
 
     public Location update(Long id, Location location) {
         Location location1 = new Location(id, location.getName());
-        System.out.println(location1.getName());
         return dao.update(id, location1);
     }
 }

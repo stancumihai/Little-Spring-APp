@@ -5,15 +5,23 @@ import com.stancumihai.mapper.LocationRowMapper;
 import com.stancumihai.model.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository("LocationDao")
 public class LocationDataAccessService implements Dao<Location> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public Location update(Long id, Location location) {
@@ -24,9 +32,14 @@ public class LocationDataAccessService implements Dao<Location> {
     }
 
     @Override
-    public int create(Location element) {
-        String sql = "INSERT into location(name) values (?)";
-        return jdbcTemplate.update(sql, element.getName());
+    public Location create(Location element) {
+        String sql = "INSERT into location(name) values (:name)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("name", element.getName());
+        namedParameterJdbcTemplate.update(sql, parameters, holder);
+        element.setId(Objects.requireNonNull(holder.getKey()).longValue());
+        return element;
     }
 
     @Override

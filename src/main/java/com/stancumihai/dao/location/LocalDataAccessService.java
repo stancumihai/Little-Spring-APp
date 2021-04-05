@@ -5,15 +5,23 @@ import com.stancumihai.mapper.LocalRowMapper;
 import com.stancumihai.model.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository("LocalDao")
 public class LocalDataAccessService implements Dao<Local> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public Local update(Long id, Local country) {
@@ -24,9 +32,14 @@ public class LocalDataAccessService implements Dao<Local> {
     }
 
     @Override
-    public int create(Local country) {
-        String sql = "INSERT into local(location) values (?)";
-        return jdbcTemplate.update(sql, country.getLocation());
+    public Local create(Local local) {
+        String sql = "INSERT into local(location) values (:location)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("location", local.getLocation());
+        namedParameterJdbcTemplate.update(sql, parameters, holder);
+        local.setId(Objects.requireNonNull(holder.getKey()).longValue());
+        return local;
     }
 
     @Override

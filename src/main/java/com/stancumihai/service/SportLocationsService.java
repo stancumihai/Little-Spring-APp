@@ -62,7 +62,7 @@ public class SportLocationsService {
     }
 
 
-    public int create(SportLocations element) {
+    public SportLocations create(SportLocations element) {
         return sportLocationsDataAccessService.create(element);
     }
 

@@ -5,15 +5,23 @@ import com.stancumihai.mapper.SportRowMapper;
 import com.stancumihai.model.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository("SportDao")
 public class SportDataAccessService implements Dao<Sport> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public Sport update(Long id, Sport sport) {
@@ -27,9 +35,16 @@ public class SportDataAccessService implements Dao<Sport> {
     }
 
     @Override
-    public int create(Sport element) {
-        String sql = "INSERT into sport(startPeriod,endPeriod,name) values (?,?,?)";
-        return jdbcTemplate.update(sql, element.getStartPeriod(), element.getEndPeriod(), element.getName());
+    public Sport create(Sport element) {
+        String sql = "INSERT into sport(startPeriod,endPeriod,name) values (:name,:startPeriod,:endPeriod)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("name", element.getName())
+                .addValue("startPeriod", element.getStartPeriod())
+                .addValue("endPeriod", element.getEndPeriod());
+        namedParameterJdbcTemplate.update(sql, parameters, holder);
+        element.setId(Objects.requireNonNull(holder.getKey()).longValue());
+        return element;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.stancumihai.service;
 
 import com.stancumihai.dao.Dao;
+import com.stancumihai.model.Local;
 import com.stancumihai.model.Location;
 import com.stancumihai.model.Region;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class RegionService {
         return dao.findById(id);
     }
 
-    public int create(Region region) {
-        return dao.create(region);
+    public Region create(Region region) {
+        Region createdRegion = dao.create(region);
+        createdRegion.setLocation(locationService.findById(createdRegion.getLocation().getId()));
+        return createdRegion;
     }
 
     public int delete(Long id) {

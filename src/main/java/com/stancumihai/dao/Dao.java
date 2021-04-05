@@ -7,7 +7,7 @@ public interface Dao<T> {
 
     T update(Long id,T element);
 
-    int create(T element);
+    T create(T element);
 
     T findById(Long id);
 

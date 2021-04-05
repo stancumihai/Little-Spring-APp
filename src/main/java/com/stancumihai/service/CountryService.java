@@ -3,6 +3,7 @@ package com.stancumihai.service;
 import com.stancumihai.dao.Dao;
 import com.stancumihai.model.Country;
 import com.stancumihai.model.Location;
+import com.stancumihai.model.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,10 @@ public class CountryService {
         return dao.findById(id);
     }
 
-    public int create(Country location) {
-        return dao.create(location);
+    public Country create(Country country) {
+        Country createdCountry = dao.create(country);
+        createdCountry.setLocation(locationService.findById(createdCountry.getLocation().getId()));
+        return createdCountry;
     }
 
     public int delete(Long id) {
@@ -34,17 +37,29 @@ public class CountryService {
     }
 
     public List<Country> selectAll() {
-        return dao.selectAll();
+        List<Country> countries = dao.selectAll();
+        for (Country country : countries) {
+            Location location = locationService.findById(country.getLocation().getId());
+            if (locationService.selectAll().contains(country)) {
+                String name = location.getName();
+                country.setLocation(location);
+                country.setName(name);
+                System.out.println(country);
+            }
+        }
+
+        return countries;
     }
 
     public Country update(Long id, Country country) {
-        return dao.update(id, country);
+        Country country1 = new Country(id, country.getLocation());
+        return dao.update(id, country1);
     }
 
     public Location getLocationByCountryId(Long id) {
         for (Country country : selectAll()) {
             if (country.getLocation().getId().equals(id)) {
-                System.out.println( locationService.findById(country.getLocation().getId()).getName());
+                System.out.println(locationService.findById(country.getLocation().getId()).getName());
                 return locationService.findById(country.getLocation().getId());
             }
         }

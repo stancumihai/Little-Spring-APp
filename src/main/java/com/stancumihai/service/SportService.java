@@ -23,7 +23,7 @@ public class SportService {
         return dao.update(id, sport);
     }
 
-    public int create(Sport element) {
+    public Sport create(Sport element) {
         return dao.create(element);
     }
 

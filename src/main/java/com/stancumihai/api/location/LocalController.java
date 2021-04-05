@@ -21,7 +21,7 @@ public class LocalController {
 
     // TODO: 4/5/2021 FixThis
     @PostMapping
-    public int create(@RequestBody Local local) {
+    public Local create(@RequestBody Local local) {
         return localService.create(local);
     }
 

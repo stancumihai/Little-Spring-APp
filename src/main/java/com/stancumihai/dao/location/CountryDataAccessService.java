@@ -33,14 +33,14 @@ public class CountryDataAccessService implements Dao<Country> {
     }
 
     @Override
-    public int create(Country country) {
+    public Country create(Country country) {
         String sql = "INSERT into country(location) values (:location)";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource parameter = new MapSqlParameterSource()
                 .addValue("location", country.getLocation().getId());
         namedParameterJdbcTemplate.update(sql, parameter, holder);
         country.setId(Objects.requireNonNull(holder.getKey()).longValue());
-        return jdbcTemplate.update(sql, country.getLocation());
+        return country;
     }
 
     @Override

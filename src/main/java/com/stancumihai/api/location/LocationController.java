@@ -33,7 +33,7 @@ public class LocationController {
      * It works
      */
     @PostMapping
-    public int create(@RequestBody Location location) {
+    public Location create(@RequestBody Location location) {
         return locationService.create(location);
     }
     /**

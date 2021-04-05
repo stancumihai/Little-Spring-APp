@@ -22,7 +22,7 @@ public class CountryController {
 
     // TODO: 4/5/2021 Fix this 
     @PostMapping
-    public int create(@RequestBody Country location) {
+    public Country create(@RequestBody Country location) {
         return countryService.create(location);
     }
 

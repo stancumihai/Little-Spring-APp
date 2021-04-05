@@ -26,8 +26,10 @@ public class LocalService {
         return dao.findById(id);
     }
 
-    public int create(Local local) {
-        return dao.create(local);
+    public Local create(Local local) {
+        Local createdLocal = dao.create(local);
+        createdLocal.setLocation(locationService.findById(createdLocal.getLocation().getId()));
+        return createdLocal;
     }
 
     public int delete(Long id) {
