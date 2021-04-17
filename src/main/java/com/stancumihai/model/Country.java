@@ -1,7 +1,5 @@
 package com.stancumihai.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 public class Country extends Location {
 
 
@@ -14,6 +12,7 @@ public class Country extends Location {
     public Country(Location location) {
         this.location = location;
     }
+
 
     public Country(Long id, Location location) {
         this.id = id;

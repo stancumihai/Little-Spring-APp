@@ -13,10 +13,14 @@ public class Location {
         this.name = name;
     }
 
-    public Location(Long id, String name ) {
+    public Location(Long id, String name) {
         this.id = id;
         this.name = name;
 
+    }
+
+    public Location(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

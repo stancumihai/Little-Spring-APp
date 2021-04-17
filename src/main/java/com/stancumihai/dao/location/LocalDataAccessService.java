@@ -26,7 +26,7 @@ public class LocalDataAccessService implements Dao<Local> {
     @Override
     public Local update(Long id, Local country) {
         String sql = "UPDATE local set location=? where id=?";
-        jdbcTemplate.update(sql, country.getLocation(), country.getId());
+        jdbcTemplate.update(sql, country.getLocation().getId(), country.getId());
 
         return country;
     }
@@ -36,7 +36,7 @@ public class LocalDataAccessService implements Dao<Local> {
         String sql = "INSERT into local(location) values (:location)";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource parameters = new MapSqlParameterSource()
-                .addValue("location", local.getLocation());
+                .addValue("location", local.getLocation().getId());
         namedParameterJdbcTemplate.update(sql, parameters, holder);
         local.setId(Objects.requireNonNull(holder.getKey()).longValue());
         return local;
@@ -44,7 +44,7 @@ public class LocalDataAccessService implements Dao<Local> {
 
     @Override
     public Local findById(Long id) {
-        String sql = "SELECT * from aplicatie.local where id =?";
+        String sql = "SELECT * from local where id =?";
         return jdbcTemplate.queryForObject(sql, new LocalRowMapper(), id);
     }
 

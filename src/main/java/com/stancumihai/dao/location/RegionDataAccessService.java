@@ -28,7 +28,7 @@ public class RegionDataAccessService implements Dao<Region> {
     @Override
     public Region update(Long id, Region region) {
         String sql = "UPDATE region set location=? where id=?";
-        jdbcTemplate.update(sql, region.getLocation(), region.getId());
+        jdbcTemplate.update(sql, region.getLocation().getId(), region.getId());
 
         return region;
     }
@@ -38,7 +38,7 @@ public class RegionDataAccessService implements Dao<Region> {
         String sql = "INSERT into region(location) values (:location)";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource parameters = new MapSqlParameterSource()
-                .addValue("location", region.getLocation());
+                .addValue("location", region.getLocation().getId());
         namedParameterJdbcTemplate.update(sql, parameters, holder);
         region.setId(Objects.requireNonNull(holder.getKey()).longValue());
         return region;

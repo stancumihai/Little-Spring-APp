@@ -44,7 +44,7 @@ public class LocationDataAccessService implements Dao<Location> {
 
     @Override
     public Location findById(Long id) {
-        String sql = "SELECT * from aplicatie.location where id =?";
+        String sql = "SELECT * from location where id =?";
         return jdbcTemplate.queryForObject(sql, new LocationRowMapper(), id);
     }
 
@@ -59,7 +59,7 @@ public class LocationDataAccessService implements Dao<Location> {
 
     @Override
     public List<Location> selectAll() {
-        String sql = "SELECT * FROM aplicatie.location ";
+        String sql = "SELECT * FROM location ";
         return jdbcTemplate.query(sql, new LocationRowMapper());
     }
 }

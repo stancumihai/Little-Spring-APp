@@ -26,9 +26,9 @@ public class SportDataAccessService implements Dao<Sport> {
     @Override
     public Sport update(Long id, Sport sport) {
 
-        String sql = "UPDATE sport set startPeriod=?,endPeriod=?,name=? where id=?";
+        String sql = "UPDATE sport set startPeriod=?,endPeriod=?,name=?,price=? where id=?";
         int updated = jdbcTemplate.update(sql, sport.getStartPeriod(), sport.getEndPeriod(),
-                sport.getName(), sport.getId());
+                sport.getName(), sport.getPrice(), sport.getId());
         if (updated == 1) {
             return sport;
         } else return null;
@@ -36,12 +36,13 @@ public class SportDataAccessService implements Dao<Sport> {
 
     @Override
     public Sport create(Sport element) {
-        String sql = "INSERT into sport(startPeriod,endPeriod,name) values (:name,:startPeriod,:endPeriod)";
+        String sql = "INSERT into sport(startPeriod,endPeriod,name,price) values (:name,:startPeriod,:endPeriod,:price)";
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("name", element.getName())
                 .addValue("startPeriod", element.getStartPeriod())
-                .addValue("endPeriod", element.getEndPeriod());
+                .addValue("endPeriod", element.getEndPeriod())
+                .addValue("price", element.getPrice());
         namedParameterJdbcTemplate.update(sql, parameters, holder);
         element.setId(Objects.requireNonNull(holder.getKey()).longValue());
         return element;

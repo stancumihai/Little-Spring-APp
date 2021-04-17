@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class SportRowMapper implements RowMapper<Sport> {
     @Override
     public Sport mapRow(ResultSet resultSet, int i) throws SQLException {
+
         Sport sport = new Sport();
         sport.setId(resultSet.getLong("id"));
         sport.setName(resultSet.getString("name"));

@@ -1,15 +1,12 @@
 package com.stancumihai.model;
 
-public class Local extends Location{
+
+public class Local extends Location {
 
     private Long id;
     private Location location;
 
     public Local() {
-    }
-
-    public Local(Location location) {
-        this.location = location;
     }
 
     public Local(Long id, Location location) {

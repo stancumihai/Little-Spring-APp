@@ -1,7 +1,6 @@
 package com.stancumihai.api.location;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stancumihai.model.Country;
 import com.stancumihai.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class CountryController {
     // TODO: 4/5/2021 Fix this 
     @PostMapping
     public Country create(@RequestBody Country location) {
-
         return countryService.create(location);
     }
 
@@ -55,7 +53,6 @@ public class CountryController {
     public Country update(@PathVariable("id") Long id, @RequestBody Country location) {
         return countryService.update(id, location);
     }
-
 }
 
 
